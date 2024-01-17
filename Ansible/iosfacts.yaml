@@ -1,0 +1,26 @@
+---
+- name: DISCOVER IOS VERSION 
+  hosts: csr
+  gather_facts: False
+  connection: local
+ 
+  tasks:
+    - name: run show version on remote devices
+      ios_command:
+        commands:
+        - show version
+        - show interfaces
+      register: ios_version_output
+
+    - name: Save IOS version output to a file
+      copy:
+        content: "{{ ios_version_output.stdout[0] }}"
+        dest: outputIOS.txt
+
+
+    - name: Set Logging Buffer Size
+      ios_config:
+        lines:
+          - logging buffered 5000
+      become: yes
+      become_method: enable
