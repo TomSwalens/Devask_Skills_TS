@@ -1,0 +1,15 @@
+devices:
+  device1:
+    alias: 'CSR1kv'
+    type: 'iosxe'
+    connections:
+      defaults:
+        class: 'telnet'
+      a:
+        ip: '192.168.56.101'
+        port: 22
+        protocol: 'telnet'
+    credentials:
+      default:
+        username: 'cisco'
+        password: 'cisco123!'
